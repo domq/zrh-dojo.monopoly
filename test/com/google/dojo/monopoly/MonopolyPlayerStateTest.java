@@ -24,26 +24,50 @@ public class MonopolyPlayerStateTest {
 		player2.SetPosition(35);
 		player2.MoveByDice(3,2);
 		assertEquals(player2.GetSquare(), 0);
-		
-		/*
-		player1_position = 
-		assertEquals(6, player1_position);
-		// Player one rolls 5-1.
-		player1_position = MonopolyPlayer.RollDice(player1_position,5,1);
-		assertEquals(12, player1_position);
-		// Assuming Player one went all the way to 39 somehow,
-		player1_position = 39;
-		// he rolls 5-1.
-		player1_position = MonopolyPlayer.RollDice(player1_position,5,1);
-		assertEquals(5, player1_position);
-	
-		// Player 2 rolls 5-1.
-		player2_position = MonopolyPlayer.RollDice(player2_position,5,1);
-		assertEquals(6, player2_position);
-		// Player one rolls 3-4.
-		player1_position = MonopolyPlayer.RollDice(player1_position,3,4);
-		assertEquals(12, player1_position);
-		*/
-	}
 
+	}
+	
+	public void PutInJail(MonopolyPlayer p) {
+		p.SetPosition(23);
+		p.MoveByDice(6, 1);
+		assertEquals("Now in jail", p.GetSquare(), 10);
+	}
+	
+	@Test
+	public void JailTestsSquare() {
+		MonopolyPlayer player1 = new MonopolyPlayer();
+		PutInJail(player1);
+		player1.MoveByDice(1, 2);
+		assertEquals("Still in jail", player1.GetSquare(), 10);
+		
+		player1.MoveByDice(2, 2);
+		assertEquals("Free at last!", player1.GetSquare(), 14);	
+		
+		player1.MoveByDice(2, 3);
+		assertEquals("should move here", player1.GetSquare(), 19);
+	}
+	@Test
+	public void JailTestsChances() {
+		MonopolyPlayer player1 = new MonopolyPlayer();
+		PutInJail(player1);
+		player1.MoveByDice(1, 2);
+		assertEquals("Still in jail", player1.GetSquare(), 10);
+		player1.MoveByDice(1, 2);
+		assertEquals("Still in jail", player1.GetSquare(), 10);
+		
+		// Third time no double; player has to pay out of jail,
+		// and keep the same dice to play.
+		// TODO: check balance went down by $50.
+		player1.MoveByDice(1, 2);
+		assertEquals("Had to pay his way out", player1.GetSquare(), 13);
+	}
+	@Test
+	public void SimpleVisit() {
+		MonopolyPlayer player1 = new MonopolyPlayer();
+		player1.SetPosition(7);
+		player1.MoveByDice(2, 1);
+		assertEquals(player1.GetSquare(), 10);
+		player1.MoveByDice(1, 2);
+		assertEquals("This was a simple visit", player1.GetSquare(), 13);
+	}
 }
