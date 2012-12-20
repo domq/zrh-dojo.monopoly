@@ -57,10 +57,31 @@ public class MonopolyPlayerStateTest {
 		
 		// Third time no double; player has to pay out of jail,
 		// and keep the same dice to play.
+		player1.MoveByDice(1, 2);
+		assertEquals("Had to pay his way out, but keeps the same dice",
+				player1.GetSquare(), 13);
+	}
+	
+	@Test
+	public void PlayerStartsWith1500Bucks() {
+		MonopolyPlayer player1 = new MonopolyPlayer();
+		assertEquals(player1.GetMoney(), 1500);
+	}
+
+	@Test
+	public void JailTestsGoingOutCostsMoney() {
+		MonopolyPlayer player1 = new MonopolyPlayer();
+		PutInJail(player1);
+		player1.MoveByDice(1, 2);
+		player1.MoveByDice(1, 2);
+		
+		// Third time no double; player has to pay out of jail,
+		// and keep the same dice to play.
 		// TODO: check balance went down by $50.
 		player1.MoveByDice(1, 2);
-		assertEquals("Had to pay his way out", player1.GetSquare(), 13);
+		assertEquals("Amount of money after pay out.", player1.GetMoney(), 1450);
 	}
+	
 	@Test
 	public void SimpleVisit() {
 		MonopolyPlayer player1 = new MonopolyPlayer();
@@ -69,5 +90,21 @@ public class MonopolyPlayerStateTest {
 		assertEquals(player1.GetSquare(), 10);
 		player1.MoveByDice(1, 2);
 		assertEquals("This was a simple visit", player1.GetSquare(), 13);
+	}
+	
+	/////////////////////////////////////////////////////////
+	@Test
+	public void IncomeTax() {
+		MonopolyPlayer player1 = new MonopolyPlayer();
+		player1.MoveByDice(1, 3);
+		assertEquals("Income tax costs $200 to rich people", player1.GetMoney(), 1300);
+	}
+	
+	@Test
+	public void LuxoryTax() {
+		MonopolyPlayer player1 = new MonopolyPlayer();
+		player1.SetPosition(30);
+		player1.MoveByDice(2, 6);
+		assertEquals("Luxory tax costs $100.", player1.GetMoney(), 1400);
 	}
 }
