@@ -98,6 +98,12 @@ public class MonopolyPlayerStateTest {
 		MonopolyPlayer player1 = new MonopolyPlayer();
 		player1.MoveByDice(1, 3);
 		assertEquals("Income tax costs $200 to rich people", player1.GetMoney(), 1300);
+		
+		MonopolyPlayer player2 = new MonopolyPlayer();
+		player2.SetMoney(200);
+		player2.MoveByDice(1, 3);
+		assertEquals(// "Income tax costs 20% of net worth to poor people",
+				160, player2.GetMoney());
 	}
 	
 	@Test
@@ -106,5 +112,14 @@ public class MonopolyPlayerStateTest {
 		player1.SetPosition(30);
 		player1.MoveByDice(2, 6);
 		assertEquals("Luxory tax costs $100.", player1.GetMoney(), 1400);
+	}
+	
+	@Test
+	public void CommunityCards() {
+		@SuppressWarnings("unused")
+		CommunityCard card1 = new BeautyContestCard();
+		MonopolyPlayer player1 = new MonopolyPlayer();
+		player1.MoveByDice(1, 1);
+		assertEquals("Second prize in a beauty contest. Collect $50", player1.GetMoney(), 1550);
 	}
 }
