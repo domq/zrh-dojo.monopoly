@@ -1,5 +1,7 @@
 package com.google.dojo.monopoly;
 
+import java.util.ArrayList;
+
 public class MonopolyPlayer {
 	
 	public interface Square {
@@ -93,9 +95,25 @@ public class MonopolyPlayer {
 		money = i;
 	}
 	
+	ArrayList<CommunityCard> card_stack = new ArrayList<CommunityCard>();
+	
+	// For tests only
+	public void SetNextCard(CommunityCard card) {
+		card_stack.add(card);
+	}
+	
+	private CommunityCard FirstCard() {
+		return card_stack.get(0);
+	}
+
 	public class CommunityChestSquare implements Square {
 		public void ArriveTo() {
-			money += 50;		
+			if (BeautyContestCard.class == FirstCard().getClass()) {
+				money += 50;
+			} else {
+				money -= 200;
 			}
+		}
+
 	}
 }
