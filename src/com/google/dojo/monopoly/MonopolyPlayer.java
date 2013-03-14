@@ -1,37 +1,6 @@
 package com.google.dojo.monopoly;
 
 public class MonopolyPlayer {
-	
-	public interface Square {
-		void ArriveTo();
-	}
-
-	public class IncomeTaxSquare implements Square {
-		public void ArriveTo() {
-			if (money < 1000) {
-				money = (money * 4)/5;
-			}
-			else
-			{
-				money -= 200;
-			}
-		}
-	}
-	
-	public class LuxuryTaxSquare implements Square {
-		public void ArriveTo() {
-			money -= 100;
-		}
-	}
-	
-	public class GoToPrisonSquare implements Square {
-		public void ArriveTo() {
-			pos = 10;
-			in_prison = true;
-			turns_in_jail = 0;
-		}
-	}
-	
 
 	private int pos;
 	private boolean in_prison;
@@ -61,7 +30,7 @@ public class MonopolyPlayer {
 				} else {
 					// Payer needs to pay his way out of jail,
 					// but keeps the same dice to play (don't return)
-					money -= 50;
+					setMoney(getMoney() - 50);
 				}
 			}
 		}
@@ -74,7 +43,7 @@ public class MonopolyPlayer {
 	
 	private void DealWithSquareEffects() {
 		if (board[pos] != null) { // TODO: this is only scaffolding until every square has an effect.
-			board[pos].ArriveTo();
+			board[pos].playerArrivedToMe(this);
 		}
 	}
 
@@ -85,32 +54,26 @@ public class MonopolyPlayer {
 	public void SetPosition(int i) {
 		pos = i;
 	}
-	
-	public int GetMoney() {
+		
+	public int getMoney() {
 		return money;
 	}
 
-	public void SetMoney(int i) {
-		money = i;
-	}
-	
-	MonopolyPlayer myself = this;
-	
-	public class CommunityChestSquare implements Square {
-		
-
-		public void ArriveTo() {
-			next_community_card.PlayerHasDrawnMe(myself);
-		}
+	public void setMoney(int money) {
+		this.money = money;
 	}
 
-	// For tests only
-	void SetNextCommunityCard(CommunityCard card1) {
-		next_community_card = card1;
-		
+	void putToPrison(GoToPrisonSquare goToPrisonSquare) {
+		pos = 10;
+		in_prison = true;
+		turns_in_jail = 0;
 	}
 
-	public CommunityCard GetNextCommunityCard() {
+	public CommunityCard getNextCommunityCard() {
 		return next_community_card;
+	}
+
+	public void setNextCommunityCard(CommunityCard next_community_card) {
+		this.next_community_card = next_community_card;
 	}
 }

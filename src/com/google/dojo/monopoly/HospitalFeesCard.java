@@ -4,7 +4,7 @@ public class HospitalFeesCard implements CommunityCard {
 
 	@Override
 	public void PlayerHasDrawnMe(MonopolyPlayer p) {
-		p.SetMoney(p.GetMoney() - 100);
+		p.setMoney(p.getMoney() - 100);
 	}
 
 }

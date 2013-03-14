@@ -65,7 +65,7 @@ public class MonopolyPlayerStateTest {
 	@Test
 	public void PlayerStartsWith1500Bucks() {
 		MonopolyPlayer player1 = new MonopolyPlayer();
-		assertEquals(player1.GetMoney(), 1500);
+		assertEquals(player1.getMoney(), 1500);
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class MonopolyPlayerStateTest {
 		// and keep the same dice to play.
 		// TODO: check balance went down by $50.
 		player1.MoveByDice(1, 2);
-		assertEquals("Amount of money after pay out.", player1.GetMoney(), 1450);
+		assertEquals("Amount of money after pay out.", player1.getMoney(), 1450);
 	}
 	
 	@Test
@@ -97,13 +97,13 @@ public class MonopolyPlayerStateTest {
 	public void IncomeTax() {
 		MonopolyPlayer player1 = new MonopolyPlayer();
 		player1.MoveByDice(1, 3);
-		assertEquals("Income tax costs $200 to rich people", player1.GetMoney(), 1300);
+		assertEquals("Income tax costs $200 to rich people", player1.getMoney(), 1300);
 		
 		MonopolyPlayer player2 = new MonopolyPlayer();
-		player2.SetMoney(200);
+		player2.setMoney(200);
 		player2.MoveByDice(1, 3);
 		assertEquals(// "Income tax costs 20% of net worth to poor people",
-				160, player2.GetMoney());
+				160, player2.getMoney());
 	}
 	
 	@Test
@@ -111,7 +111,7 @@ public class MonopolyPlayerStateTest {
 		MonopolyPlayer player1 = new MonopolyPlayer();
 		player1.SetPosition(30);
 		player1.MoveByDice(2, 6);
-		assertEquals("Luxory tax costs $100.", player1.GetMoney(), 1400);
+		assertEquals("Luxory tax costs $100.", player1.getMoney(), 1400);
 	}
 	
 	@Test
@@ -119,9 +119,9 @@ public class MonopolyPlayerStateTest {
 		@SuppressWarnings("unused")
 		CommunityCard card1 = new BeautyContestCard();
 		MonopolyPlayer player1 = new MonopolyPlayer();
-		player1.SetNextCommunityCard(card1);
+		player1.setNextCommunityCard(card1);
 		player1.MoveByDice(1, 1);
-		assertEquals("Second prize in a beauty contest. Collect $50", 1550, player1.GetMoney());
+		assertEquals("Second prize in a beauty contest. Collect $50", 1550, player1.getMoney());
 	}
 	
 	@Test
@@ -129,9 +129,9 @@ public class MonopolyPlayerStateTest {
 		@SuppressWarnings("unused")
 		CommunityCard card1 = new HospitalFeesCard();
 		MonopolyPlayer player1 = new MonopolyPlayer();
-		player1.SetNextCommunityCard(card1);
+		player1.setNextCommunityCard(card1);
 		player1.MoveByDice(1, 1);
-		assertEquals("Pay Hospital Fees. Pay $100", 1400, player1.GetMoney());
+		assertEquals("Pay Hospital Fees. Pay $100", 1400, player1.getMoney());
 	}
 	
 	@Test
@@ -140,7 +140,7 @@ public class MonopolyPlayerStateTest {
 		// TODO: having community cards inside the player, as opposed to inside the
 		// board, is wrong. This will need refactoring later.
 		MonopolyPlayer player1 = new MonopolyPlayer();
-		player1.SetNextCommunityCard(card1);
-		assertEquals(card1, player1.GetNextCommunityCard());
+		player1.setNextCommunityCard(card1);
+		assertEquals(card1, player1.getNextCommunityCard());
 	}
 }
