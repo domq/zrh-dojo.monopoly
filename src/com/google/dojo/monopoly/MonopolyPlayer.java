@@ -37,6 +37,7 @@ public class MonopolyPlayer {
 	private boolean in_prison;
 	private int turns_in_jail;
 	private int money = 1500;
+	private CommunityCard next_community_card;
 	
 	private Square[] board;
 	
@@ -93,9 +94,23 @@ public class MonopolyPlayer {
 		money = i;
 	}
 	
+	MonopolyPlayer myself = this;
+	
 	public class CommunityChestSquare implements Square {
+		
+
 		public void ArriveTo() {
-			money += 50;		
-			}
+			next_community_card.PlayerHasDrawnMe(myself);
+		}
+	}
+
+	// For tests only
+	void SetNextCommunityCard(CommunityCard card1) {
+		next_community_card = card1;
+		
+	}
+
+	public CommunityCard GetNextCommunityCard() {
+		return next_community_card;
 	}
 }

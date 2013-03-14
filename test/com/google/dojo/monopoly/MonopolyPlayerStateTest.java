@@ -119,7 +119,28 @@ public class MonopolyPlayerStateTest {
 		@SuppressWarnings("unused")
 		CommunityCard card1 = new BeautyContestCard();
 		MonopolyPlayer player1 = new MonopolyPlayer();
+		player1.SetNextCommunityCard(card1);
 		player1.MoveByDice(1, 1);
-		assertEquals("Second prize in a beauty contest. Collect $50", player1.GetMoney(), 1550);
+		assertEquals("Second prize in a beauty contest. Collect $50", 1550, player1.GetMoney());
+	}
+	
+	@Test
+	public void CommunityCards_2() {
+		@SuppressWarnings("unused")
+		CommunityCard card1 = new HospitalFeesCard();
+		MonopolyPlayer player1 = new MonopolyPlayer();
+		player1.SetNextCommunityCard(card1);
+		player1.MoveByDice(1, 1);
+		assertEquals("Pay Hospital Fees. Pay $100", 1400, player1.GetMoney());
+	}
+	
+	@Test
+	public void GetAndSetNextCommunityCard() {
+		CommunityCard card1 = new HospitalFeesCard();
+		// TODO: having community cards inside the player, as opposed to inside the
+		// board, is wrong. This will need refactoring later.
+		MonopolyPlayer player1 = new MonopolyPlayer();
+		player1.SetNextCommunityCard(card1);
+		assertEquals(card1, player1.GetNextCommunityCard());
 	}
 }
