@@ -8,17 +8,13 @@ public class MonopolyPlayer {
 	private int money = 1500;
 	private CommunityCard next_community_card;
 	
-	private Square[] board;
-	
+	private Board board = new Board();
+
 	MonopolyPlayer() {
 		pos = 0;
 		in_prison = false;
 		
-		board = new Square[40];
-		board[2] = new CommunityChestSquare();
-		board[4] = new IncomeTaxSquare();
-		board[30] = new GoToPrisonSquare();
-		board[38] = new LuxuryTaxSquare();
+		
 	}
 
 	public void MoveByDice(int i, int j) {
@@ -42,8 +38,8 @@ public class MonopolyPlayer {
 	}
 	
 	private void DealWithSquareEffects() {
-		if (board[pos] != null) { // TODO: this is only scaffolding until every square has an effect.
-			board[pos].playerArrivedToMe(this);
+		if (board.getBoard()[pos] != null) { // TODO: this is only scaffolding until every square has an effect.
+			board.getBoard()[pos].playerArrivedToMe(this);
 		}
 	}
 
