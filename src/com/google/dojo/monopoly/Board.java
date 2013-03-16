@@ -10,11 +10,14 @@ public class Board {
 		board[38] = new LuxuryTaxSquare();
 	}
 
-	public Square[] getBoard() {
-		return board;
+	public Square getSquareAt(int index) {
+		return board[index];
 	}
 
-	public void setBoard(Square[] board) {
-		this.board = board;
+	void DealWithSquareEffects(MonopolyPlayer monopolyPlayer) {
+		if (getSquareAt(monopolyPlayer.GetSquare() ) != null) { // TODO: this is only scaffolding until every square has an effect.
+			getSquareAt(monopolyPlayer.GetSquare()).playerArrivedToMe(monopolyPlayer);
+		}
 	}
+
 }

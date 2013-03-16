@@ -34,15 +34,9 @@ public class MonopolyPlayer {
 		// Normal movement rules.
 		in_prison = false;
 		pos  = (pos + i + j) % 40;
-		DealWithSquareEffects();
+		board.DealWithSquareEffects(this);
 	}
 	
-	private void DealWithSquareEffects() {
-		if (board.getBoard()[pos] != null) { // TODO: this is only scaffolding until every square has an effect.
-			board.getBoard()[pos].playerArrivedToMe(this);
-		}
-	}
-
 	public int GetSquare() {
 		return pos;
 	}
