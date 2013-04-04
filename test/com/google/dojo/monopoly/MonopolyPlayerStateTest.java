@@ -143,4 +143,12 @@ public class MonopolyPlayerStateTest {
 		player1.setNextCommunityCard(card1);
 		assertEquals(card1, player1.getNextCommunityCard());
 	}
+	
+	@Test
+	public void GoPastGo() {
+		MonopolyPlayer player1 = new MonopolyPlayer();
+		player1.SetPosition(39);
+		player1.MoveByDice(1, 1);
+		assertEquals("You have passed GO. Collect $200", 1700, player1.getMoney());
+	}
 }

@@ -33,7 +33,11 @@ public class MonopolyPlayer {
 
 		// Normal movement rules.
 		in_prison = false;
-		pos  = (pos + i + j) % 40;
+		int new_pos = pos + i + j;
+		if (new_pos > 40) {
+			money += 200;
+		}
+		pos = new_pos % 40;
 		board.DealWithSquareEffects(this);
 	}
 	

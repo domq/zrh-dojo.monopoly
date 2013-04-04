@@ -4,7 +4,8 @@ public class Board {
 	private Square[] board = new Square[40];
 
 	public Board() {
-		board[2] = new CommunityChestSquare();
+		board[0] = new GoSquare();
+		board[2] = board[17] = board[33] = new CommunityChestSquare();
 		board[4] = new IncomeTaxSquare();
 		board[30] = new GoToPrisonSquare();
 		board[38] = new LuxuryTaxSquare();
