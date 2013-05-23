@@ -4,7 +4,7 @@ public class BeautyContestCard implements CommunityCard {
 
 	@Override
 	public void PlayerHasDrawnMe(MonopolyPlayer p) {
-		p.setMoney(p.getMoney() + 50);
+		p.earnMoney(50);
 	}
 
 }

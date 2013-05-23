@@ -70,4 +70,15 @@ public class MonopolyPlayer {
 	public void setNextCommunityCard(CommunityCard next_community_card) {
 		this.next_community_card = next_community_card;
 	}
+
+	public void chargeMoney(int amount) {
+		if (amount > money) {
+			throw new BrokePlayerException();
+		}
+		money -= amount;
+	}
+
+	public void earnMoney(int amount) {
+		setMoney(getMoney() + amount);
+	}
 }

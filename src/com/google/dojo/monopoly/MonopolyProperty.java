@@ -2,9 +2,18 @@ package com.google.dojo.monopoly;
 
 public class MonopolyProperty {
 	
-	MonopolyPlayer owner;
+	private MonopolyPlayer owner;
+	private int propertyValue;
 
-	public void setOwner(MonopolyPlayer newOwner) {
+	public MonopolyProperty(int value) {
+		propertyValue = value;
+	}
+
+	public MonopolyProperty() {
+		propertyValue = 200;
+	}
+
+	void setOwner(MonopolyPlayer newOwner) {
 		owner = newOwner;
 	}
 
@@ -26,5 +35,10 @@ public class MonopolyProperty {
 			throw new ForbiddenSaleException("Cannot sell, already taken");
 		}
 		owner = buyer;
+		buyer.chargeMoney(propertyValue);
+	}
+
+	public int getValue() {
+		return propertyValue;
 	}
 }
